@@ -9,9 +9,46 @@ public abstract class Conta implements TransferenciaBancaria {
 
     //atributo protected
     protected BigDecimal saldo;
+    protected BigDecimal limite;
 
     Conta(BigDecimal saldo) {
         this.saldo = saldo;
+    }
+
+    public BigDecimal sacar(BigDecimal valor){
+        System.out.println("sacando R$" + valor + " Reais PF");
+
+
+        saldo = this.saldo.subtract(aplicaTaxaSaque(valor));
+
+        return saldo;
+    }
+
+    //sobrecarga --> polimorfismo
+    public BigDecimal depositar(Integer valor) {
+        System.out.println("depositando R$" + valor + " Reais Pf");
+
+        saldo = this.saldo.add(BigDecimal.valueOf(valor));
+
+        return saldo;
+    }
+
+    //sobrecarga --> polimorfismo
+    public BigDecimal depositar(Long valor) {
+        System.out.println("depositando R$" + valor + " Reais Pf");
+
+        saldo = this.saldo.add(BigDecimal.valueOf(valor));
+
+        return saldo;
+    }
+
+    //sobrecarga --> polimorfismo
+    public BigDecimal depositar(BigDecimal valor) {
+        System.out.println("depositando R$" + valor + " Reais Pf");
+
+        saldo = this.saldo.add(valor);
+
+        return saldo;
     }
 
     public BigDecimal sacar(BigDecimal valor){
@@ -94,5 +131,14 @@ public abstract class Conta implements TransferenciaBancaria {
 
     public BigDecimal getSaldo(){
         return this.saldo;
+    }
+
+    BigDecimal compraEfetuada() {
+        BigDecimal valorCompra = BigDecimal.valueOf(0);
+        return valorCompra.subtract(limite);
+    }
+
+    BigDecimal limiteRestante() {
+        return limite.subtract(BigDecimal.valueOf(5000));
     }
 }
