@@ -10,7 +10,3 @@ public interface TransferenciaBancaria {
     BigDecimal doc(BigDecimal valor, Conta conta);
     BigDecimal pix(BigDecimal valor, Conta conta);
 }
-
-public interface OperacoesCredito {
-
-}

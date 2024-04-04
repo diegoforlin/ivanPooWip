@@ -5,14 +5,15 @@ import java.util.Date;
 
 public abstract class Cartao {
 
-    private String numeroCartao;
-    private Date dataValidadeCartao;
+    public static String numeroCartao;
+    public static String dataValidadeCartao;
+    public static String senhaCartao;
     private String cvcCartao;
-    private String senhaCartao;
     private boolean bloqueado;
     private BigDecimal saldo;
+    int tentativas = 3;
 
-    public Cartao(String numeroCartao, Date dataValidadeCartao, String cvcCartao, String senhaCartao, boolean bloqueado) {
+    public Cartao(String numeroCartao, String dataValidadeCartao, String cvcCartao, String senhaCartao, boolean bloqueado) {
         this.numeroCartao = numeroCartao;
         this.dataValidadeCartao = dataValidadeCartao;
         this.cvcCartao = cvcCartao;
@@ -20,20 +21,24 @@ public abstract class Cartao {
         this.bloqueado = bloqueado;
     }
 
+    public Cartao() {
+
+    }
+
     public String getNumeroCartao() {
         return numeroCartao;
     }
 
     public void setNumeroCartao(String numeroCartao) {
-        this.numeroCartao = numeroCartao;
+        Cartao.numeroCartao = numeroCartao;
     }
 
-    public Date getDataValidadeCartao() {
+    public String getDataValidadeCartao() {
         return dataValidadeCartao;
     }
 
-    public void setDataValidadeCartao(Date dataValidadeCartao) {
-        this.dataValidadeCartao = dataValidadeCartao;
+    public void setDataValidadeCartao(String dataValidadeCartao) {
+        Cartao.dataValidadeCartao = dataValidadeCartao;
     }
 
     public String getCvcCartao() {
@@ -49,7 +54,11 @@ public abstract class Cartao {
     }
 
     public void setSenhaCartao(String senhaCartao) {
-        this.senhaCartao = senhaCartao;
+        if(senhaCartao.length() == 6){
+            this.senhaCartao = senhaCartao;
+            System.out.println("Senha aprovada.");
+        }
+        System.out.println("Senha inválida.");
     }
 
     public boolean isBloqueado() {
@@ -67,4 +76,4 @@ public abstract class Cartao {
     public void setSaldo(BigDecimal saldo) {
         this.saldo = saldo;
     }
-}
+        }
