@@ -1,5 +1,7 @@
 package poo.cartao;
 
+import poo.conta.Conta;
+
 import java.math.BigDecimal;
 import java.util.Date;
 
@@ -10,8 +12,7 @@ public abstract class Cartao {
     public static String senhaCartao;
     private String cvcCartao;
     private boolean bloqueado;
-    private BigDecimal saldo;
-    int tentativas = 3;
+    public static BigDecimal saldo = BigDecimal.valueOf(1000);
 
     public Cartao(String numeroCartao, String dataValidadeCartao, String cvcCartao, String senhaCartao, boolean bloqueado) {
         this.numeroCartao = numeroCartao;
@@ -77,3 +78,4 @@ public abstract class Cartao {
         this.saldo = saldo;
     }
         }
+

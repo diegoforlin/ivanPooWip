@@ -8,10 +8,14 @@ import java.math.BigDecimal;
 public abstract class Conta implements TransferenciaBancaria {
 
     //atributo protected
-    protected BigDecimal saldo;
+    protected static BigDecimal saldo;
 
     Conta(BigDecimal saldo) {
         this.saldo = saldo;
+    }
+
+    public static BigDecimal consultaSaldo() {
+        return saldo;
     }
 
     public BigDecimal sacar(BigDecimal valor){

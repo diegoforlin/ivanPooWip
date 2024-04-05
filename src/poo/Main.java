@@ -1,21 +1,20 @@
 package poo;
-import poo.cartao.Cartao;
 import poo.cartao.CartaoCredito;
 import poo.cartao.Cliente;
+import poo.conta.ContaService;
 
-import java.math.BigDecimal;
 import java.util.Scanner;
 
-import static poo.cartao.Cartao.senhaCartao;
-import static poo.cartao.Cliente.*;
+import static poo.conta.ContaService.*;
 
 public class Main {
     private static Scanner sc = new Scanner(System.in).useDelimiter("\n");
+    private static ContaService contaService = new ContaService();
+    private static Cliente cliente = new Cliente();
+    private static CartaoCredito cartaoCredito = new CartaoCredito();
     public static void main(String[] args) {
-        Cliente cliente = new Cliente();
-        CartaoCredito cartaoCredito = new CartaoCredito();
         var opcao = exibirMenu();
-        while (opcao != 6) {
+        while (opcao != 11) {
             try {
                 switch (opcao) {
                     case 1:
@@ -37,10 +36,20 @@ public class Main {
                         System.out.println("Use o cheque especial no cartão de débito.");
                         break;
                     case 6:
+                        consultaSaldo();
                         System.out.println("Cheque o seu saldo financeiro.");
                         break;
                     case 7:
-                        quit();
+                        depositar();
+                        System.out.println("Deposite dinheiro em sua conta.");
+                    case 8:
+                        sacar();
+                        System.out.println("Saque dinheiro de sua conta.");
+                    case 9:
+                        pix();
+                        System.out.println("Realize um pix para outra conta bancária.");
+                    case 10:
+                        sair();
                         System.out.println("Sair do aplicativo.");
                         break;
                     default:
@@ -55,45 +64,7 @@ public class Main {
         }
         System.out.println("Finalizando a aplicação.");
     }
-    private static void exibeLimite() {
-
-    }
-
-    private static void limiteRestante() {
-    }
-
-    private static void compraEfetuada() {
-    }
-
-    private static void login() {
-        System.out.println("Entre com seu nome.");
-        nome = sc.nextLine();
-        System.out.println("Bem-vindo, + " + nome + ". Entre com seu cpf.");
-        cpf = sc.nextLine();
-        System.out.println("Seu cpf é " + cpf + " .Entre com sua data de aniversário, " + nome + " . Formato DD/MM/YYYY.");
-        Cliente.dataAniversario = sc.nextLine();
-        System.out.println("Sua data de aniversário é " + dataAniversario + " .Entre com o seu número de cartão.");
-        Cartao.numeroCartao = sc.nextLine();
-        System.out.println("Agora, entre com a data de validade do cartão.");
-        Cartao.dataValidadeCartao = sc.nextLine();
-        System.out.println("Digite a sua senha de seis dígitos.");
-        senhaCartao = sc.nextLine();
-        bloqueado();
-        System.out.println("Você logou com segurança. Por favor, aperte 1 para voltar ao menu ou 2 para encerrar a aplicação.");
-        char a = sc.next().charAt(0);
-        if (a == 1) {
-            exibirMenu();
-        } else {
-                quit();
-            }
-                System.out.println("Saindo do Luke's Bank...");
-                }
-    private static void quit() {
-        System.out.println("Saindo do Luke's Bank...");
-        sc.close();
-    }
-            }
-    private static int exibirMenu() {
+    public static int exibirMenu() {
         System.out.println("""
                 LUKE'S BANK - ESCOLHA UMA OPÇÃO:
                 1 - Fazer login no Luke's Bank.
@@ -102,21 +73,26 @@ public class Main {
                 4 - Checar o limite utilizado.
                 5 - Usar o cheque especial em um cartão de débito.
                 6 - Checar o saldo financeiro.
-                7 - Sair
+                7 - Deposite dinheiro em sua conta.
+                8 - Saque o seu dinheiro.
+                9 - Realize um pix para outra conta bancária.
+                10 - Sair
                 """);
+        sc.next();
+        return exibirMenu();
     }
-    private static boolean bloqueado() {
-        int tentativas = 3;
-        if (tentativas != 0) {
-            if (senhaCartao.equals(tentativas)) {
-                System.out.println("Senha correta.");
-            } else {
-                System.out.println("Senha incorreta. Favor tentar novamente.");
-            }
-        } else {
-            System.out.println("Tentativas para desbloquear o cartão excedidas.");
-        }
+
+    public static void consultaSaldo() {
+        System.out.println("Digite o CPF:");
+        var cpf = sc.nextLine();
+        ContaService.consultaSaldo(cpf);
+        System.out.println("Saldo da conta: ");
+        System.out.println(saldo);
+        System.out.println("Pressione qualquer tecla e de ENTER para voltar ao menu principal");
+        sc.next();
     }
+    }
+
 
 
 
