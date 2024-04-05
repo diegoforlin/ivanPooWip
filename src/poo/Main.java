@@ -91,6 +91,7 @@ public class Main {
         System.out.println(saldo);
         System.out.println("Pressione qualquer tecla e de ENTER para voltar ao menu principal");
         sc.next();
+        sc.next();
     }
 
     public static BigDecimal compraEfetuada() {
