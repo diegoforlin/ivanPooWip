@@ -16,7 +16,7 @@ public class Main {
 
     public static void main(String[] args) {
         var opcao = exibirMenu();
-        while (opcao != 11) {
+        while (opcao != 10) {
             try {
                 switch (opcao) {
                     case 1:
@@ -50,10 +50,6 @@ public class Main {
                     case 9:
                         pix();
                         System.out.println("Realize um pix para outra conta bancária.");
-                    case 10:
-                        sair();
-                        System.out.println("Sair do aplicativo.");
-                        break;
                     default:
                         System.out.println("Opção inválida.");
                 }

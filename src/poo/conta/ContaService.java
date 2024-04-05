@@ -47,7 +47,6 @@ public class ContaService extends Conta {
 
     public static void sair() {
         System.out.println("Saindo do Luke's Bank...");
-        sc.close();
     }
 
     public static void exibeLimite() {
