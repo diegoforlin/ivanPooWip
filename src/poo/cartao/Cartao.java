@@ -1,11 +1,5 @@
 package poo.cartao;
-
-import poo.conta.Conta;
-
 import java.math.BigDecimal;
-import java.util.Date;
-
-import static poo.conta.ContaService.saldo;
 
 public abstract class Cartao {
 

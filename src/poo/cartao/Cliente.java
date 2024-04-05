@@ -3,17 +3,18 @@ package poo.cartao;
 import java.util.Date;
 
 public class Cliente {
+    public static String titular;
     public static String nome;
     public static String cpf;
     public static String dataAniversario;
 
     public Cliente() {
-        nome = nome;
-        cpf = cpf;
-        dataAniversario = dataAniversario;
+        this.nome = getNome();
+        this.cpf = getCpf();
+        this.dataAniversario = getDataAniversario();
     }
 
-    public String getNome() {
+    public static String getNome() {
         return nome;
     }
 

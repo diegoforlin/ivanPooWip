@@ -1,11 +1,13 @@
 package poo;
+import poo.cartao.Cartao;
 import poo.cartao.CartaoCredito;
 import poo.cartao.Cliente;
-import poo.conta.Conta;
 import poo.conta.ContaService;
 
+import java.math.BigDecimal;
 import java.util.Scanner;
 
+import static poo.cartao.Cliente.*;
 import static poo.conta.ContaService.*;
 
 public class Main {
@@ -79,6 +81,7 @@ public class Main {
                 """);
         return sc.nextInt();
     }
+
     public static void consultaSaldo() {
         System.out.println("Digite o CPF:");
         sc.nextLine();
@@ -88,6 +91,51 @@ public class Main {
         System.out.println(saldo);
         System.out.println("Pressione qualquer tecla e de ENTER para voltar ao menu principal");
         sc.next();
+    }
+
+    public static BigDecimal compraEfetuada() {
+        String produto;
+        System.out.println("Qual produto você deseja comprar?");
+        sc.next();
+        produto = sc.nextLine();
+        System.out.println("Qual o valor de " + produto + " ?");
+        sc.next();
+        BigDecimal valor = sc.nextBigDecimal();
+        System.out.println("Comprando um produto " + produto + " no valor de " + valor);
+        sc.next();
+        saldo.subtract(valor);
+        return compraEfetuada();
+    }
+
+    public static void login() {
+        System.out.println("Entre com seu nome.");
+        sc.next();
+        Cliente.nome = sc.nextLine();
+        System.out.println("Bem-vindo, " + Cliente.nome + ". Entre com seu cpf.");
+        sc.next();
+        Cliente.cpf = sc.nextLine();
+        System.out.println("Seu cpf é " + Cliente.cpf + " .Entre com sua data de aniversário, " + nome + " . Formato DD/MM/YYYY.");
+        sc.next();
+        Cliente.dataAniversario = sc.nextLine();
+        System.out.println("Sua data de aniversário é " + Cliente.dataAniversario + " .Entre com o seu número de cartão.");
+        sc.next();
+        Cartao.numeroCartao = sc.nextLine();
+        System.out.println("Agora, entre com a data de validade do cartão.");
+        sc.next();
+        Cartao.dataValidadeCartao = sc.nextLine();
+        System.out.println("Digite a sua senha de seis dígitos.");
+        sc.next();
+        Cartao.senhaCartao = sc.nextLine();
+        bloqueado();
+        System.out.println("Você logou com segurança. Por favor, aperte 1 para voltar ao menu ou 2 para encerrar a aplicação.");
+        char opcao2 = 2;
+        if (opcao2 == 2) {
+            sc.close();
+        } else {
+            exibirMenu();
+            return;
+        }
+        exibirMenu();
     }
 }
 

@@ -58,7 +58,6 @@ public class ContaService extends Conta {
     }
 
     public static BigDecimal compraEfetuada() {
-
         String produto;
         System.out.println("Qual produto você deseja comprar?");
         produto = sc.nextLine();
@@ -85,7 +84,7 @@ public class ContaService extends Conta {
         bloqueado();
         System.out.println("Você logou com segurança. Por favor, aperte 1 para voltar ao menu ou 2 para encerrar a aplicação.");
     }
-    private static boolean bloqueado() {
+    public static boolean bloqueado() {
         int tentativas = 3;
         if (tentativas != 0) {
             if (senhaCartao.equals(tentativas)) {
