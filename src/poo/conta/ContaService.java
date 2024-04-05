@@ -9,11 +9,15 @@ import java.util.Scanner;
 import static poo.cartao.Cartao.senhaCartao;
 import static poo.cartao.Cliente.*;
 
-public class ContaService {
+public class ContaService extends Conta {
 
     static Scanner sc = new Scanner(System.in);
 
     public static BigDecimal saldo = BigDecimal.valueOf(1000);
+
+    public ContaService() {
+        super(saldo);
+    }
 
     public BigDecimal getSaldo() {
         return saldo;
@@ -33,12 +37,7 @@ public class ContaService {
 
     }
 
-    public static BigDecimal consultaSaldo(String cpf) {
-        System.out.println("Digite o seu CPF:");
-        Cliente.cpf = sc.nextLine();
-        System.out.println("Digite a sua senha.");
-        senhaCartao = sc.nextLine();
-        System.out.println("Saldo da conta: ");
+    public static BigDecimal consultaSaldo() {
         return saldo;
     }
 

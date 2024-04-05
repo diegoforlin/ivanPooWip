@@ -5,6 +5,8 @@ import poo.conta.Conta;
 import java.math.BigDecimal;
 import java.util.Date;
 
+import static poo.conta.ContaService.saldo;
+
 public abstract class Cartao {
 
     public static String numeroCartao;
@@ -12,7 +14,7 @@ public abstract class Cartao {
     public static String senhaCartao;
     private String cvcCartao;
     private boolean bloqueado;
-    public static BigDecimal saldo = BigDecimal.valueOf(1000);
+    private BigDecimal saldo;
 
     public Cartao(String numeroCartao, String dataValidadeCartao, String cvcCartao, String senhaCartao, boolean bloqueado) {
         this.numeroCartao = numeroCartao;

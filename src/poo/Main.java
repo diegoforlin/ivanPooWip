@@ -1,6 +1,7 @@
 package poo;
 import poo.cartao.CartaoCredito;
 import poo.cartao.Cliente;
+import poo.conta.Conta;
 import poo.conta.ContaService;
 
 import java.util.Scanner;
@@ -12,6 +13,7 @@ public class Main {
     private static ContaService contaService = new ContaService();
     private static Cliente cliente = new Cliente();
     private static CartaoCredito cartaoCredito = new CartaoCredito();
+
     public static void main(String[] args) {
         var opcao = exibirMenu();
         while (opcao != 11) {
@@ -64,6 +66,7 @@ public class Main {
         }
         System.out.println("Finalizando a aplicação.");
     }
+
     public static int exibirMenu() {
         System.out.println("""
                 LUKE'S BANK - ESCOLHA UMA OPÇÃO:
@@ -78,20 +81,19 @@ public class Main {
                 9 - Realize um pix para outra conta bancária.
                 10 - Sair
                 """);
-        sc.next();
-        return exibirMenu();
+        return sc.nextInt();
     }
-
     public static void consultaSaldo() {
         System.out.println("Digite o CPF:");
-        var cpf = sc.nextLine();
-        ContaService.consultaSaldo(cpf);
+        sc.nextLine();
+        Cliente.cpf = sc.nextLine();
+        contaService.getSaldo();
         System.out.println("Saldo da conta: ");
         System.out.println(saldo);
         System.out.println("Pressione qualquer tecla e de ENTER para voltar ao menu principal");
         sc.next();
     }
-    }
+}
 
 
 
