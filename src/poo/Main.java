@@ -88,8 +88,22 @@ public class Main {
         System.out.println("Voltando ao menu principal...");
     }
 
-    private static void sacar() {
+    public static BigDecimal taxaSaque() {
+        return BigDecimal.valueOf(1 + 0.10);
+    }
+    private static BigDecimal aplicaTaxaSaque(BigDecimal valorSaque){
+        return valorSaque.multiply(taxaSaque());
+    }
 
+    private static void sacar() {
+        System.out.println("Digite o CPF:");
+        sc.nextLine();
+        String cpf = sc.nextLine();
+        System.out.println("Quanto você deseja sacar do seu saldo de " + saldo + " ?");
+        BigDecimal valor = sc.nextBigDecimal();
+        saldo = saldo.subtract(aplicaTaxaSaque(valor));
+        System.out.println("Você sacou " + valor + " e com a taxa de saque seu saldo ficou em " + saldo);
+        System.out.println("Voltando ao menu principal...");
     }
 
     private static void consultaSaldo() {
