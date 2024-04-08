@@ -3,23 +3,25 @@ import java.math.BigDecimal;
 
 public abstract class Cartao {
 
-    public static String numeroCartao;
-    public static String dataValidadeCartao;
-    public static String senhaCartao;
+    public String numeroCartao;
+    public String dataValidadeCartao;
+    public String senhaCartao;
     private String cvcCartao;
-    private boolean bloqueado;
-    private BigDecimal saldo;
-
-    public Cartao(String numeroCartao, String dataValidadeCartao, String cvcCartao, String senhaCartao, boolean bloqueado) {
-        this.numeroCartao = numeroCartao;
-        this.dataValidadeCartao = dataValidadeCartao;
-        this.cvcCartao = cvcCartao;
-        this.senhaCartao = senhaCartao;
-        this.bloqueado = bloqueado;
-    }
+    public BigDecimal saldo;
 
     public Cartao() {
+        this.numeroCartao = getNumeroCartao();
+        this.dataValidadeCartao = getDataValidadeCartao();
+        this.cvcCartao = getCvcCartao();
+        this.senhaCartao = getSenhaCartao();
+        this.saldo = getSaldo();
+    }
+    public BigDecimal getSaldo() {
+        return saldo;
+    }
 
+    public void setSaldo(BigDecimal saldo) {
+        this.saldo = saldo;
     }
 
     public String getNumeroCartao() {
@@ -27,7 +29,7 @@ public abstract class Cartao {
     }
 
     public void setNumeroCartao(String numeroCartao) {
-        Cartao.numeroCartao = numeroCartao;
+        this.numeroCartao = numeroCartao;
     }
 
     public String getDataValidadeCartao() {
@@ -35,7 +37,7 @@ public abstract class Cartao {
     }
 
     public void setDataValidadeCartao(String dataValidadeCartao) {
-        Cartao.dataValidadeCartao = dataValidadeCartao;
+        this.dataValidadeCartao = dataValidadeCartao;
     }
 
     public String getCvcCartao() {
@@ -51,27 +53,11 @@ public abstract class Cartao {
     }
 
     public void setSenhaCartao(String senhaCartao) {
-        if(senhaCartao.length() == 6){
+        if (senhaCartao.length() == 6) {
             this.senhaCartao = senhaCartao;
             System.out.println("Senha aprovada.");
         }
         System.out.println("Senha inválida.");
     }
-
-    public boolean isBloqueado() {
-        return bloqueado;
-    }
-
-    public void setBloqueado(boolean bloqueado) {
-        this.bloqueado = bloqueado;
-    }
-
-    public BigDecimal getSaldo() {
-        return saldo;
-    }
-
-    public void setSaldo(BigDecimal saldo) {
-        this.saldo = saldo;
-    }
-        }
+}
 

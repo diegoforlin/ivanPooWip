@@ -7,8 +7,7 @@ public class CartaoCredito extends Cartao {
     private BigDecimal limiteUtilizado;
 
 
-    public CartaoCredito(String numeroCartao, String dataValidadeCartao, String cvcCartao, String senhaCartao, boolean bloqueado) {
-        super(numeroCartao, dataValidadeCartao, cvcCartao, senhaCartao, bloqueado);
+    public CartaoCredito(String numeroCartao, String dataValidadeCartao, String cvcCartao, String senhaCartao) {
     }
 
     public CartaoCredito() {

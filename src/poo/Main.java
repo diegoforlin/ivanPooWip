@@ -1,20 +1,11 @@
 package poo;
-import poo.cartao.Cartao;
-import poo.cartao.CartaoCredito;
-import poo.cartao.Cliente;
-import poo.conta.ContaService;
-
 import java.math.BigDecimal;
 import java.util.Scanner;
 
-import static poo.cartao.Cliente.*;
-import static poo.conta.ContaService.*;
-
+import static poo.conta.Conta.limite;
+import static poo.conta.Conta.saldo;
 public class Main {
-    private static Scanner sc = new Scanner(System.in).useDelimiter("\n");
-    private static ContaService contaService = new ContaService();
-    private static Cliente cliente = new Cliente();
-    private static CartaoCredito cartaoCredito = new CartaoCredito();
+    static Scanner sc = new Scanner(System.in).useDelimiter("\n");
 
     public static void main(String[] args) {
         var opcao = exibirMenu();
@@ -26,32 +17,28 @@ public class Main {
                         break;
                     case 2:
                         compraEfetuada();
-                        System.out.println("Realize uma compra.");
                         break;
                     case 3:
                         exibeLimite();
-                        System.out.println("Cheque o seu limite.");
                         break;
                     case 4:
                         limiteRestante();
-                        System.out.println("Cheque o limite utilizado.");
                         break;
                     case 5:
-                        System.out.println("Use o cheque especial no cartão de débito.");
+                        chequeEspecial();
                         break;
                     case 6:
                         consultaSaldo();
-                        System.out.println("Cheque o seu saldo financeiro.");
                         break;
                     case 7:
                         depositar();
-                        System.out.println("Deposite dinheiro em sua conta.");
+                        break;
                     case 8:
                         sacar();
-                        System.out.println("Saque dinheiro de sua conta.");
+                        break;
                     case 9:
                         pix();
-                        System.out.println("Realize um pix para outra conta bancária.");
+                        break;
                     default:
                         System.out.println("Opção inválida.");
                 }
@@ -63,6 +50,78 @@ public class Main {
             opcao = exibirMenu();
         }
         System.out.println("Finalizando a aplicação.");
+    }
+
+    private static void chequeEspecial() {
+    }
+
+    private static void limiteRestante() {
+        System.out.println("Entre com seu CPF.");
+        String cpf = sc.nextLine();
+        sc.nextLine();
+        System.out.println("Seu limite restante é de: ");
+    }
+
+    private static void exibeLimite() {
+        System.out.println("Entre com seu CPF.");
+        String cpf = sc.nextLine();
+        sc.nextLine();
+        System.out.println("Seu limite é de: ");
+        System.out.println(limite);
+        System.out.println("Voltando ao menu principal...");
+    }
+
+    private static void pix() {
+
+    }
+
+    private static void depositar() {
+        System.out.println("Entre com seu CPF.");
+        String cpf = sc.nextLine();
+        sc.nextLine();
+        System.out.println("Digite quantos R$ deseja depositar na sua conta:");
+        BigDecimal valor;
+        valor = sc.nextBigDecimal();
+        System.out.println("Depositando R$" + valor + " reais na conta pessoa física.");
+        saldo = saldo.add(valor);
+        System.out.println("Seu saldo atual é de " + saldo);
+        System.out.println("Voltando ao menu principal...");
+    }
+
+    private static void sacar() {
+
+    }
+
+    private static void consultaSaldo() {
+        
+        System.out.println("Digite o CPF:");
+        sc.nextLine();
+        String cpf = sc.nextLine();
+        System.out.println("Saldo da conta: ");
+        System.out.println(saldo);
+        System.out.println("Voltando ao menu principal...");
+    }
+
+    private static void login() {
+        System.out.println("Entre com seu nome.");
+        sc.next();
+        String nome = sc.nextLine();
+        System.out.println("Bem-vindo, " + nome + ". Entre com seu cpf.");
+        sc.next();
+        String cpf = sc.nextLine();
+        System.out.println("Seu cpf é " + cpf + " .Entre com sua data de aniversário, " + nome + " . Formato DD/MM/YYYY.");
+        sc.next();
+        String dataAniversario = sc.nextLine();
+        System.out.println("Sua data de aniversário é " + dataAniversario + " .Entre com o seu número de cartão.");
+        sc.next();
+        String numeroCartao = sc.nextLine();
+        System.out.println("Agora, entre com a data de validade do cartão.");
+        sc.next();
+        String dataValidadeCartao = sc.nextLine();
+        System.out.println("Digite a sua senha de seis dígitos.");
+        sc.next();
+        String senhaCartao = sc.nextLine();
+        System.out.println("Você logou com segurança. Por favor, aperte 1 para voltar ao menu ou 2 para encerrar a aplicação.");
     }
 
     public static int exibirMenu() {
@@ -82,18 +141,6 @@ public class Main {
         return sc.nextInt();
     }
 
-    public static void consultaSaldo() {
-        System.out.println("Digite o CPF:");
-        sc.nextLine();
-        Cliente.cpf = sc.nextLine();
-        contaService.getSaldo();
-        System.out.println("Saldo da conta: ");
-        System.out.println(saldo);
-        System.out.println("Pressione qualquer tecla e de ENTER para voltar ao menu principal");
-        sc.next();
-        sc.next();
-    }
-
     public static BigDecimal compraEfetuada() {
         String produto;
         System.out.println("Qual produto você deseja comprar?");
@@ -106,37 +153,6 @@ public class Main {
         sc.next();
         saldo.subtract(valor);
         return compraEfetuada();
-    }
-
-    public static void login() {
-        System.out.println("Entre com seu nome.");
-        sc.next();
-        Cliente.nome = sc.nextLine();
-        System.out.println("Bem-vindo, " + Cliente.nome + ". Entre com seu cpf.");
-        sc.next();
-        Cliente.cpf = sc.nextLine();
-        System.out.println("Seu cpf é " + Cliente.cpf + " .Entre com sua data de aniversário, " + nome + " . Formato DD/MM/YYYY.");
-        sc.next();
-        Cliente.dataAniversario = sc.nextLine();
-        System.out.println("Sua data de aniversário é " + Cliente.dataAniversario + " .Entre com o seu número de cartão.");
-        sc.next();
-        Cartao.numeroCartao = sc.nextLine();
-        System.out.println("Agora, entre com a data de validade do cartão.");
-        sc.next();
-        Cartao.dataValidadeCartao = sc.nextLine();
-        System.out.println("Digite a sua senha de seis dígitos.");
-        sc.next();
-        Cartao.senhaCartao = sc.nextLine();
-        bloqueado();
-        System.out.println("Você logou com segurança. Por favor, aperte 1 para voltar ao menu ou 2 para encerrar a aplicação.");
-        char opcao2 = 2;
-        if (opcao2 == 2) {
-            sc.close();
-        } else {
-            exibirMenu();
-            return;
-        }
-        exibirMenu();
     }
 }
 
