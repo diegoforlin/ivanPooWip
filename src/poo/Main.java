@@ -118,24 +118,25 @@ public class Main {
 
     private static void login() {
         System.out.println("Entre com seu nome.");
-        sc.next();
-        String nome = sc.nextLine();
+        String nome;
+        sc.nextLine();
+        nome = sc.nextLine();
         System.out.println("Bem-vindo, " + nome + ". Entre com seu cpf.");
-        sc.next();
-        String cpf = sc.nextLine();
-        System.out.println("Seu cpf é " + cpf + " .Entre com sua data de aniversário, " + nome + " . Formato DD/MM/YYYY.");
-        sc.next();
-        String dataAniversario = sc.nextLine();
-        System.out.println("Sua data de aniversário é " + dataAniversario + " .Entre com o seu número de cartão.");
-        sc.next();
-        String numeroCartao = sc.nextLine();
-        System.out.println("Agora, entre com a data de validade do cartão.");
-        sc.next();
-        String dataValidadeCartao = sc.nextLine();
-        System.out.println("Digite a sua senha de seis dígitos.");
-        sc.next();
-        String senhaCartao = sc.nextLine();
-        System.out.println("Você logou com segurança. Por favor, aperte 1 para voltar ao menu ou 2 para encerrar a aplicação.");
+        String cpf;
+        cpf = sc.nextLine();
+        System.out.println("Seu cpf é " + cpf + ". Entre com sua data de aniversário, " + nome + ". Formato DD/MM/YYYY.");
+        String dataAniversario;
+        dataAniversario = sc.nextLine();
+        System.out.println("Sua data de aniversário é " + dataAniversario +". Entre com o seu número de cartão.");
+        String numeroCartao;
+        numeroCartao = sc.nextLine();
+        System.out.println("Seu número do cartão é " + numeroCartao + ". Agora, entre com a data de validade do cartão. Formato MM/YYYY");
+        String dataValidadeCartao;
+        dataValidadeCartao = sc.nextLine();
+        System.out.println("A data de validade do seu cartão é " + dataValidadeCartao + ". Digite a sua senha de seis dígitos.");
+        String senhaCartao;
+        senhaCartao = sc.nextLine();
+        System.out.println("Senha inserida com sucesso. Voltando ao menu...");
     }
 
     public static int exibirMenu() {
@@ -143,7 +144,7 @@ public class Main {
                 LUKE'S BANK - ESCOLHA UMA OPÇÃO:
                 1 - Fazer login no Luke's Bank.
                 2 - Realizar uma compra.
-                3 - Checar o limite restante.
+                3 - Checar o limite.
                 4 - Checar o limite utilizado.
                 5 - Usar o cheque especial em um cartão de débito.
                 6 - Checar o saldo financeiro.
