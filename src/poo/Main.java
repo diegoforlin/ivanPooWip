@@ -1,15 +1,15 @@
 package poo;
+import poo.cartao.Cliente;
 import java.math.BigDecimal;
 import java.util.Scanner;
-
 import static poo.conta.Conta.limite;
 import static poo.conta.Conta.saldo;
 public class Main {
     static Scanner sc = new Scanner(System.in).useDelimiter("\n");
-
+    Cliente cliente = new Cliente();
     public static void main(String[] args) {
         var opcao = exibirMenu();
-        while (opcao != 10) {
+        while (opcao != 11) {
             try {
                 switch (opcao) {
                     case 1:
@@ -22,7 +22,7 @@ public class Main {
                         exibeLimite();
                         break;
                     case 4:
-                        limiteRestante();
+                        limiteUtilizado();
                         break;
                     case 5:
                         chequeEspecial();
@@ -39,6 +39,9 @@ public class Main {
                     case 9:
                         pix();
                         break;
+                    case 10:
+                        comprarCredito();
+                        break;
                     default:
                         System.out.println("Opção inválida.");
                 }
@@ -52,14 +55,34 @@ public class Main {
         System.out.println("Finalizando a aplicação.");
     }
 
+    private static void comprarCredito() {
+        System.out.println("Qual produto você deseja comprar?");
+        String produto;
+        sc.nextLine();
+        produto = sc.nextLine();
+        System.out.println("Qual o valor de " + produto + " ?");
+        BigDecimal valor;
+        valor = sc.nextBigDecimal();
+        System.out.println("Comprando um produto " + produto + " no valor de " + valor);
+        limite = limite.subtract(valor);
+        System.out.println("Calculando limite. Pressione enter para continuar.");
+        sc.next();
+        System.out.println("Seu limite atual é de " + limite);
+        System.out.println("Voltando ao menu principal...");
+    }
+
     private static void chequeEspecial() {
     }
 
-    private static void limiteRestante() {
+    private static void limiteUtilizado() {
+        BigDecimal valor = BigDecimal.valueOf(0);
         System.out.println("Entre com seu CPF.");
         String cpf = sc.nextLine();
         sc.nextLine();
-        System.out.println("Seu limite restante é de: ");
+        BigDecimal limiteUtilizado = limite.subtract(valor);
+        System.out.println("Seu limite utilizado é de: " + limiteUtilizado);
+        sc.next();
+        System.out.println("Voltando ao menu principal...");
     }
 
     private static void exibeLimite() {
@@ -72,7 +95,16 @@ public class Main {
     }
 
     private static void pix() {
-
+        System.out.println("Digite a conta o qual deseja depositar o pix.");
+        String conta;
+        conta = sc.nextLine();
+        sc.next();
+        BigDecimal valor;
+        System.out.println("Digite o valor a ser depositado.");
+        valor = sc.nextBigDecimal();
+        System.out.println("Você depositou R$" + valor + ". Seu saldo é de " + saldo);
+        saldo = saldo.subtract(valor);
+        System.out.println("Voltando ao menu principal...");
     }
 
     private static void depositar() {
@@ -151,23 +183,26 @@ public class Main {
                 7 - Deposite dinheiro em sua conta.
                 8 - Saque o seu dinheiro.
                 9 - Realize um pix para outra conta bancária.
-                10 - Sair
+                10 - Comprar com cartão de crédito.
+                11 - Sair
                 """);
         return sc.nextInt();
     }
 
-    public static BigDecimal compraEfetuada() {
-        String produto;
+    private static void compraEfetuada() {
         System.out.println("Qual produto você deseja comprar?");
-        sc.next();
+        String produto;
+        sc.nextLine();
         produto = sc.nextLine();
         System.out.println("Qual o valor de " + produto + " ?");
-        sc.next();
-        BigDecimal valor = sc.nextBigDecimal();
+        BigDecimal valor;
+        valor = sc.nextBigDecimal();
         System.out.println("Comprando um produto " + produto + " no valor de " + valor);
+        saldo = saldo.subtract(valor);
+        System.out.println("Calculando saldo. Pressione enter para continuar.");
         sc.next();
-        saldo.subtract(valor);
-        return compraEfetuada();
+        System.out.println("Seu saldo atual é de " + saldo);
+        System.out.println("Voltando ao menu principal...");
     }
 }
 

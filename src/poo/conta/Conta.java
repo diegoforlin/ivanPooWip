@@ -103,6 +103,14 @@ public abstract class Conta implements TransferenciaBancaria {
         return this.saldo;
     }
 
+    public static BigDecimal getLimite() {
+        return limite;
+    }
+
+    public static void setLimite(BigDecimal limite) {
+        Conta.limite = limite;
+    }
+
     private BigDecimal chequeEspecial;
 
 }
